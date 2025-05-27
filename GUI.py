@@ -80,12 +80,17 @@ class NutricionistaApp:
         self.cantidad.grid(row=3, column=1)
         ttk.Button(self.tab_plan_comidas, text="Agregar Plan de Comidas", command=self.agregar_plan_comidas).grid(row=4, column=0, columnspan=2)
 
+        Frame_listar = ttk.Frame(self.tab_listar)
+        Frame_listar.pack(expand=1, fill="both")
+
+        ttk.Button(Frame_listar, text="Actualizar Lista", command=self.listar_planes).pack(pady=10)
+
         # Listar Planes de Comidas
-        self.tree = ttk.Treeview(self.tab_listar, columns=("Paciente", "Alimento", "Fecha", "Cantidad", "Calorías Totales"), show="headings")
+        self.tree = ttk.Treeview(Frame_listar, columns=("Paciente", "Alimento", "Fecha", "Cantidad", "Calorías Totales"), show="headings")
         for col in ("Paciente", "Alimento", "Fecha", "Cantidad", "Calorías Totales"):
             self.tree.heading(col, text=col)
-        self.tree.pack(expand=1, fill="both")
-        ttk.Button(self.tab_listar, text="Actualizar Lista", command=self.listar_planes).pack()
+        self.tree.pack(expand=1, fill="both", pady=(10, 0))
+        
         self.listar_planes()
 
     def agregar_paciente(self):
